@@ -1,3 +1,5 @@
+:: NOTHING WORKS! 
+
 @echo off
 setlocal
 
