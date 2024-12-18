@@ -1,6 +1,7 @@
 @echo off
 setlocal
 
+:: Version of rife you want to use! 
 set "RIFE_VERSION=rife-anime"
 
 if "%~1"=="" (
@@ -9,6 +10,7 @@ if "%~1"=="" (
     exit /b
 )
 
+:: Set your rife path right here! 
 set rife_exe=C:\rife\rife-ncnn-vulkan.exe
 set rife_model_path=C:\rife\%RIFE_VERSION%
 set input_video=%~1
@@ -36,8 +38,9 @@ if not exist "%~dp1output_frames\00000001.png" (
     exit /b
 )
 
+:: change framerate [value] to desired value (FPS)  
 echo Processing with FFmpeg
-ffmpeg -framerate 48 -i "%~dp1output_frames\%%08d.png" -i %audio_output% -c:a copy -crf 20 -c:v libx264 -pix_fmt yuv420p %final_output%
+ffmpeg -framerate 120 -i "%~dp1output_frames\%%08d.png" -i %audio_output% -c:a copy -crf 20 -c:v libx264 -pix_fmt yuv420p %final_output%
 echo FFmpeg processing completed.
 
 if not exist "%final_output%" (
