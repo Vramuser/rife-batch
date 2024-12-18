@@ -1,5 +1,3 @@
-:: NOTHING WORKS! 
-
 @echo off
 setlocal
 
@@ -29,11 +27,10 @@ ffmpeg -i %input_video% "%~dp1input_frames\frame_%%08d.png"
 echo Frame decoding completed.
 
 echo Running RIFE %RIFE_VERSION%
-echo Command: "%rife_exe%" -i "%~dp1input_frames" -o "%~dp1output_frames" -m "%rife_model_path%"
-"%rife_exe%" -i "%~dp1input_frames" -o "%~dp1output_frames" -m "%rife_model_path%" -f %~dp1output_frames\%08d.png
+"%rife_exe%" -i "%~dp1input_frames" -o "%~dp1output_frames" -m "%rife_model_path%"
 echo RIFE interpolation completed.
 
-if not exist "%~dp1output_frames\00000000.png" (
+if not exist "%~dp1output_frames\00000001.png" (
     echo No output frames found in output_frames directory.
     pause
     exit /b
@@ -42,6 +39,12 @@ if not exist "%~dp1output_frames\00000000.png" (
 echo Processing with FFmpeg
 ffmpeg -framerate 48 -i "%~dp1output_frames\%%08d.png" -i %audio_output% -c:a copy -crf 20 -c:v libx264 -pix_fmt yuv420p %final_output%
 echo FFmpeg processing completed.
+
+if not exist "%final_output%" (
+    echo The final output video was not created. Please check for errors in the FFmpeg command.
+    pause
+    exit /b
+)
 
 endlocal
 pause
