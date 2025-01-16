@@ -1,3 +1,4 @@
+:: barely works tbh. You have to edit the file itself. One day I'll resume this product and make a config.txt file or something like that ugggg.
 @echo off
 setlocal
 
