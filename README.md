@@ -1,4 +1,5 @@
 # Rife-Batch
+project is now dead
 Uses RIFE NCNN-VULKAN and FFmpeg. 
 RIFE (Real-Time Intermediate Flow Estimation) 
 
